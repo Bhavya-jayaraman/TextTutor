@@ -16,6 +16,8 @@ import java.sql.DriverManager;
 
 @Configuration
 public class DataSourceConfig {
+    @Value("${spring.profiles.active:}")
+    private String activeProfiles;
 
     private static final Logger log = LoggerFactory.getLogger(DataSourceConfig.class);
 
@@ -52,6 +54,12 @@ public class DataSourceConfig {
                 return new HikariDataSource(config);
             }
         } catch (Exception ex) {
+             if (java.util.Arrays.asList(activeProfiles.split(","))
+                    .contains("prod")) {
+                throw new IllegalStateException(
+                        "Production database connection failed. Check TiDB settings.",
+                        ex);
+            }
             log.warn("Primary MySQL connection could not be established ({}: {}). Activating persistent local storage fallback.",
                     ex.getClass().getSimpleName(), ex.getMessage());
             log.info("Initializing persistent local database at ./data/texttutor_db with MySQL compatibility mode.");
