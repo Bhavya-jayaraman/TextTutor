@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: texttutor-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/texttutor?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: ${MAX_FILE_SIZE:50MB}
+      max-request-size: ${MAX_REQUEST_SIZE:55MB}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET:texttutor_super_secret_jwt_key_2026_at_least_32_bytes_long}
+  expiration-hours: 24
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY:}
+  model: ${GEMINI_MODEL:gemini-3.1-flash-lite}
+
+texttutor:
+  upload:
+    max-file-size-mb: ${MAX_FILE_SIZE_MB:50}
+    allowed-extensions: pdf,docx,txt,md
+  rag:
+    chunk-size: ${RAG_CHUNK_SIZE:600}
+    chunk-overlap: ${RAG_CHUNK_OVERLAP:120}
+    max-retrieval-chunks: ${RAG_MAX_CHUNKS:5}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

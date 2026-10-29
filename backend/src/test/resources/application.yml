@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: texttutor-backend-test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+
+server:
+  port: 0
+
+jwt:
+  secret: test_super_secret_jwt_key_at_least_32_bytes_long_12345
+  expiration-hours: 2

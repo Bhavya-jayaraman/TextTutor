@@ -1,0 +1,19 @@
+#!/bin/sh
+# Maven Wrapper script for Unix/macOS/Linux/Git Bash on Windows.
+# This script downloads Maven automatically if it is not already cached.
+
+if [ -z "$JAVA_HOME" ]; then
+  JAVACMD="java"
+else
+  JAVACMD="$JAVA_HOME/bin/java"
+fi
+
+WRAPPER_JAR="$(dirname "$0")/.mvn/wrapper/maven-wrapper.jar"
+WRAPPER_PROPERTIES="$(dirname "$0")/.mvn/wrapper/maven-wrapper.properties"
+DOWNLOAD_URL=$(grep distributionUrl "$WRAPPER_PROPERTIES" | sed 's/distributionUrl=//')
+MAVEN_DIST_DIR="$HOME/.m2/wrapper/dists"
+
+exec "$JAVACMD" \
+  -classpath "$WRAPPER_JAR" \
+  "-Dmaven.multiModuleProjectDirectory=$(dirname "$0")" \
+  org.apache.maven.wrapper.MavenWrapperMain "$@"

@@ -1,0 +1,41 @@
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+build/
+coverage/
+**/target/
+.DS_Store
+*.log
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local databases and uploaded files
+data/
+**/data/
+*.mv.db
+*.trace.db
+uploads/
+**/uploads/
+
+# Runtime / local-only build helper files (machine-specific, never commit)
+backend/full_cp.txt
+backend/javac_main_args.txt
+backend/jvm_app.txt
+backend/jvm_suite.txt
+backend/filter_cp.ps1
+
+# Bun lock (not used — project uses npm)
+bun.lock
+
+# Temporary test artefacts
+*.class
+TestCandidates.java
+TestGeminiSSL*.java
+TestUrlConn*.java
